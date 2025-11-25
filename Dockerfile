@@ -1,7 +1,7 @@
 FROM alpine:latest
 
-# 安装编译环境
-RUN apk add --no-cache build-base clang
+# 安装编译环境 + 内核头文件（提供 linux/netfilter_ipv4.h）
+RUN apk add --no-cache build-base clang linux-headers
 
 # 工作目录
 WORKDIR /app
