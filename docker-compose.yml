@@ -1,0 +1,20 @@
+version: "3.8"
+
+services:
+  baidu-proxy:
+    build: .
+    container_name: baidu-proxy
+    restart: unless-stopped
+
+    # 映射宿主机端口：宿主 8088 -> 容器 8088
+    ports:
+      - "8088:8088"
+
+    # 使用环境变量控制端口和远端地址
+    environment:
+      - LISTEN_PORT=8088
+      - REMOTE_ADDR=cloudnproxy.baidu.com
+
+    # 如果想让程序以守护模式运行，可以在这里追加参数（会传给 entrypoint，再传给 thread_socket）
+    # 比如打开 -d：
+    # command: ["-d"]
